@@ -1,0 +1,963 @@
+/* ============================================================================
+   DESIGN SYSTEM - Color, Spacing, Typography & Animations
+   ============================================================================ */
+
+:root {
+    /* Color Palette - Primary Blue System */
+    --primary: #4874b0;
+    --primary-light: #6b92c9;
+    --primary-lighter: #8fb0d9;
+    --primary-lightest: #d4e3f7;
+    --primary-dark: #2d5282;
+    --primary-darker: #1a3a52;
+    
+    /* Neutral Colors - Background & Text */
+    --accent: #f8fafc;
+    --accent-secondary: #f1f5fb;
+    --text-dark: #0f172a;
+    --text-light: #ffffff;
+    --text-muted: #64748b;
+    
+    /* Borders & Dividers */
+    --border: #e2e8f0;
+    --border-light: #f1f5fb;
+    
+    /* Semantic Colors */
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    
+    /* Shadow System - Multi-layered depth */
+    --shadow-xs: 0 1px 2px rgba(15,23,42,0.05);
+    --shadow-sm: 0 2px 6px rgba(72,116,176,0.1);
+    --shadow-md: 0 4px 12px rgba(72,116,176,0.12);
+    --shadow-lg: 0 10px 28px rgba(72,116,176,0.15);
+    --shadow-xl: 0 16px 48px rgba(72,116,176,0.18);
+    
+    /* Spacing Scale (8px base) */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 56px;
+    --space-4xl: 64px;
+    
+    /* Border Radius - Consistency */
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    
+    /* Transitions - Performance optimized */
+    --transition-fast: 0.12s cubic-bezier(0.4,0,0.2,1);
+    --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    --transition-slow: 0.4s cubic-bezier(0.4,0,0.2,1);
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Line Heights */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.6;
+    --line-height-relaxed: 1.8;
+}
+
+/* ============================================================================
+   RESET & BASE STYLES - HTML5 Foundation
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* Prevent zoom on iOS */
+}
+
+body {
+    background: linear-gradient(135deg, #1a3a52 0%, #2d5282 35%, #4874b0 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Ensure proper default link styling */
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Ensure buttons have proper styling */
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Images optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Improve form element styling */
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* ============================================================================
+   HEADER - Navigation & Branding
+   ============================================================================ */
+
+.header {
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(16px, 2.5vh, 32px) clamp(20px, 3vw, 48px);
+    box-shadow: var(--shadow-md);
+    border-bottom: 2px solid var(--primary);
+    position: relative;
+    z-index: 100;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+}
+
+.header h1 {
+    font-size: clamp(20px, 5vw, 36px);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: -1px;
+    line-height: var(--line-height-tight);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0; /* Reset h1 default margin */
+}
+
+.header-icon {
+    font-size: clamp(20px, 4vw, 28px);
+    color: var(--primary);
+    transition: all var(--transition);
+    cursor: pointer;
+    padding: clamp(4px, 0.5vw, 8px); /* Increase touch area */
+}
+
+.header-icon:hover {
+    transform: rotate(22deg) scale(1.2);
+    color: var(--primary-light);
+    filter: drop-shadow(0 4px 12px rgba(72,116,176,0.3));
+}
+
+.header-icon:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* ============================================================================
+   MAIN CONTAINER - Layout Structure
+   ============================================================================ */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 48px);
+    padding: clamp(24px, 3vh, 56px) clamp(16px, 3vw, 48px);
+    flex-wrap: wrap;
+}
+
+/* ============================================================================
+   HISTORY PANEL - Image History & Recent Items
+   ============================================================================ */
+
+.history-panel {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    height: clamp(120px, 15vh, 180px);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    gap: clamp(16px, 2vw, 24px);
+    align-items: center;
+    padding: clamp(16px, 2vh, 32px) clamp(12px, 1.5vw, 18px) clamp(12px, 1.5vh, 18px);
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border);
+    transition: box-shadow var(--transition), border-color var(--transition);
+    scroll-behavior: smooth;
+}
+
+.history-panel:focus-within {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.history-panel .box-label {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-dark);
+    z-index: 2;
+    background: linear-gradient(135deg, var(--primary-lightest), rgba(255,255,255,0.95));
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 20px;
+    letter-spacing: 0.6px;
+    border: 1px solid var(--border);
+    text-transform: capitalize;
+}
+
+.history-item {
+    position: relative;
+    display: inline-flex;
+    height: clamp(90px, 11vh, 110px);
+    flex-shrink: 0;
+}
+
+.history-panel img {
+    height: 100%;
+    width: clamp(90px, 11vw, 110px);
+    border-radius: var(--radius);
+    object-fit: cover;
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
+.history-panel img:hover {
+    transform: scale(1.12) translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.history-panel img:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.history-remove-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+    color: white;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 16px;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-md);
+    padding: 0; /* Reset button padding */
+}
+
+.history-item:hover .history-remove-btn {
+    opacity: 1;
+}
+
+.history-remove-btn:hover {
+    background: #b91c1c;
+    transform: scale(1.2) rotate(90deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.history-remove-btn:focus-visible {
+    opacity: 1;
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   LEFT PANEL - Image Upload & Controls
+   ============================================================================ */
+
+.left-panel {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    min-width: 280px;
+}
+
+.upload-box {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    height: clamp(240px, 40vh, 360px);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: clamp(6px, 1vw, 8px);
+    padding: clamp(20px, 2.5vh, 32px) clamp(12px, 1.5vw, 18px) clamp(12px, 1.5vh, 18px);
+    align-items: start;
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border);
+    transition: all var(--transition);
+}
+
+.upload-box:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.upload-box.single img {
+    grid-column: 1 / -1;
+    max-width: 65%;
+    height: auto;
+    justify-self: center;
+    align-self: start;
+    position: relative;
+    object-fit: contain;
+}
+
+.box-label {
+    position: absolute;
+    top: clamp(8px, 1.5vh, 14px);
+    left: clamp(12px, 2vw, 20px);
+    font-size: clamp(10px, 1.2vw, 11px);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-dark);
+    z-index: 2;
+    background: linear-gradient(135deg, var(--primary-lightest), rgba(255,255,255,0.95));
+    padding: clamp(4px, 0.5vh, 6px) clamp(8px, 1vw, 12px);
+    border-radius: 20px;
+    letter-spacing: 0.6px;
+    border: 1px solid var(--border);
+    text-transform: capitalize;
+}
+
+.preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    border-radius: var(--radius-xl);
+}
+
+/* ============================================================================
+   ICON BUTTONS - Actions & Controls
+   ============================================================================ */
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--primary);
+    transition: all var(--transition);
+    padding: var(--space-sm);
+    border-radius: var(--radius);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    transform: scale(1.3) rotate(-15deg);
+    color: var(--primary-light);
+    filter: drop-shadow(0 2px 8px rgba(72,116,176,0.3));
+}
+
+.icon-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+/* ============================================================================
+   CIRCLE BUTTONS - Round Icon Buttons
+   ============================================================================ */
+
+.center-icons {
+    display: flex;
+    justify-content: center;
+    gap: clamp(24px, 5vw, 48px);
+    margin-top: clamp(2px, 0.5vh, 4px);
+    flex-wrap: wrap;
+}
+
+.circle-btn {
+    width: clamp(56px, 8vw, 68px);
+    height: clamp(56px, 8vw, 68px);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    font-size: clamp(20px, 2.5vw, 24px);
+    color: var(--primary);
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.circle-btn:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.08);
+}
+
+.circle-btn:active {
+    transform: translateY(0) scale(1);
+}
+
+.circle-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* ============================================================================
+   ACTION BUTTONS - Primary Call-to-Action Buttons
+   ============================================================================ */
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+.buttons button {
+    padding: clamp(12px, 1.5vh, 32px) clamp(12px, 1.5vw, 24px);
+    border-radius: var(--radius);
+    border: 2px solid var(--border);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    color: var(--primary-dark);
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(11px, 1.3vw, 13px);
+    cursor: pointer;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.buttons button:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: translateY(0);
+}
+
+.buttons button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   RIGHT PANEL - Results Display & Content
+   ============================================================================ */
+
+.right-panel {
+    width: 55%;
+    height: clamp(450px, 70vh, 681px);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    border-radius: var(--radius-xl);
+    position: relative;
+    min-width: 300px;
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition);
+}
+
+.right-panel:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.top-icons {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: var(--space-md);
+    z-index: 2;
+}
+
+/* Results content area with proper scrollbar styling */
+#analysisResults {
+    position: absolute;
+    top: clamp(50px, 6vh, 60px);
+    bottom: clamp(10px, 1.5vh, 15px);
+    left: clamp(12px, 2vw, 20px);
+    right: clamp(12px, 2vw, 20px);
+    overflow-y: auto;
+    color: var(--text-dark);
+    padding: clamp(16px, 2vw, 32px);
+    background: linear-gradient(135deg, rgba(248,250,252,0.6), rgba(241,245,251,0.8));
+    border-radius: var(--radius);
+    word-wrap: break-word;
+    font-size: clamp(13px, 1.5vw, 15px);
+    line-height: var(--line-height-relaxed);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-light);
+    transition: all var(--transition);
+}
+
+#analysisResults:focus-within {
+    border-color: var(--primary);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 0 0 3px rgba(72,116,176,0.1);
+}
+
+/* Webkit scrollbar styling for Chrome, Safari, Edge */
+#analysisResults::-webkit-scrollbar {
+    width: 8px;
+}
+
+#analysisResults::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#analysisResults::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: var(--radius);
+    border: 2px solid var(--accent);
+}
+
+#analysisResults::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Typography styling for results content */
+#analysisResults p {
+    margin-bottom: var(--space-md);
+}
+
+#analysisResults p:last-child {
+    margin-bottom: 0;
+}
+
+#analysisResults strong {
+    color: var(--primary-dark);
+    font-weight: var(--font-weight-bold);
+}
+
+#analysisResults em {
+    color: var(--primary);
+    font-style: italic;
+}
+
+#analysisResults ul,
+#analysisResults ol {
+    padding-left: var(--space-2xl);
+    margin-bottom: var(--space-md);
+}
+
+#analysisResults li {
+    margin-bottom: var(--space-sm);
+    color: var(--text-dark);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================================
+   INPUT & SEND BUTTON - Bottom Input Area
+   ============================================================================ */
+
+.bottom-input {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: clamp(12px, 2vw, 16px);
+    padding: clamp(16px, 2vh, 32px) clamp(16px, 2vw, 32px);
+}
+
+.bottom-input input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 600px;
+    padding: clamp(12px, 1.5vw, 24px) clamp(12px, 1.5vw, 20px);
+    border-radius: var(--radius);
+    border: 2px solid var(--border);
+    background: white;
+    color: var(--text-dark);
+    font-size: clamp(12px, 1.5vw, 14px);
+    transition: all var(--transition);
+    box-shadow: var(--shadow-xs);
+}
+
+.bottom-input input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.bottom-input input:focus {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md), 0 0 0 4px rgba(72,116,176,0.1);
+    outline: none;
+    background: linear-gradient(135deg, rgba(248,250,252,0.5), rgba(255,255,255));
+}
+
+.bottom-input input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 0;
+}
+
+.send-btn {
+    width: clamp(44px, 6vw, 54px);
+    height: clamp(44px, 6vw, 54px);
+    border-radius: var(--radius);
+    border: 2px solid var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    cursor: pointer;
+    color: white;
+    font-size: clamp(18px, 2.5vw, 22px);
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.send-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-color: var(--primary-dark);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.send-btn:active {
+    transform: translateY(0);
+}
+
+.send-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - Mobile & Tablet Breakpoints
+   ============================================================================ */
+
+/* Tablet breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-2xl);
+        gap: var(--space-lg);
+    }
+
+    .history-panel,
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        height: auto;
+    }
+
+    /* History panel adjusted for tablet */
+    .history-panel {
+        height: 120px;
+        margin-bottom: var(--space-lg);
+    }
+
+    .left-panel {
+        align-items: center;
+        gap: var(--space-2xl);
+    }
+
+    /* Upload box scaling */
+    .upload-box {
+        width: 100%;
+        height: 240px;
+        min-height: 240px;
+    }
+
+    /* Icon buttons spacing */
+    .center-icons {
+        margin-top: var(--space-sm);
+        gap: var(--space-2xl);
+    }
+
+    .circle-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+
+    /* Right panel adjustment */
+    .right-panel {
+        margin-top: var(--space-lg);
+        min-height: 300px;
+        height: auto;
+    }
+
+    #analysisResults {
+        position: static;
+        max-height: 350px;
+        margin-bottom: var(--space-xl);
+    }
+
+    /* Input area for tablets */
+    .bottom-input {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-md);
+        padding: var(--space-lg);
+    }
+
+    .bottom-input input {
+        width: 100%;
+        padding: var(--space-lg);
+    }
+
+    /* Action buttons */
+    .buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .buttons button {
+        padding: var(--space-lg);
+        font-size: 12px;
+    }
+}
+
+/* Mobile breakpoint (max-width: 640px) */
+@media (max-width: 640px) {
+    .container {
+        flex-direction: column;
+        padding: var(--space-lg);
+        gap: var(--space-lg);
+    }
+
+    /* Header adjustments for mobile */
+    .header {
+        padding: var(--space-lg) var(--space-2xl);
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header-icon {
+        font-size: 20px;
+        display: none;
+    }
+
+    /* History panel for mobile */
+    .history-panel {
+        max-height: 110px;
+    }
+
+    .history-item {
+        max-width: 90px;
+        max-height: 90px;
+    }
+
+    /* Left panel full width */
+    .left-panel {
+        width: 100%;
+    }
+
+    /* Upload box mobile */
+    .upload-box {
+        height: 220px;
+        padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    }
+
+    /* Circle buttons mobile */
+    .center-icons {
+        gap: var(--space-xl);
+    }
+
+    .circle-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 20px;
+    }
+
+    /* Buttons mobile layout */
+    .buttons {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .buttons button {
+        padding: var(--space-lg);
+        font-size: 12px;
+    }
+
+    /* Right panel mobile */
+    .right-panel {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+    }
+
+    #analysisResults {
+        position: static;
+        max-height: 300px;
+    }
+
+    /* Input mobile */
+    .bottom-input {
+        flex-direction: column;
+        padding: var(--space-lg);
+        justify-content: stretch;
+    }
+
+    .bottom-input input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .send-btn {
+        width: 100%;
+        height: auto;
+        padding: var(--space-lg);
+    }
+
+    /* Footer mobile */
+    .footer {
+        padding: var(--space-lg) var(--space-md);
+        font-size: 11px;
+    }
+
+    body {
+        padding-bottom: 65px;
+    }
+}
+
+/* ============================================================================
+   FOOTER - Application Credits & Information
+   ============================================================================ */
+
+.footer {
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+    color: var(--primary-dark);
+    padding: clamp(12px, 1.5vh, 24px) clamp(16px, 2vw, 30px);
+    text-align: center;
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(11px, 1.3vw, 12px);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 -2px 12px rgba(72,116,176,0.12);
+    border-top: 2px solid var(--primary);
+    letter-spacing: 0.4px;
+    transition: all var(--transition);
+}
+
+/* Footer links styling */
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition);
+    border-bottom: 1px solid transparent;
+}
+
+.footer a:hover {
+    color: var(--primary-dark);
+    border-bottom-color: var(--primary-dark);
+}
+
+.footer a:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
+/* Body without footer padding - footer is fixed and doesn't occupy space */
+body {
+    padding-bottom: 78px;
+}
+/* ============================================================================
+   FULLSCREEN / F11 HEIGHT CONTROL
+   Evita scroll verticale nella parte sinistra
+   ============================================================================ */
+
+.container {
+    min-height: calc(100vh - 120px); /* header + footer spazio */
+    align-items: stretch;
+}
+
+.left-panel {
+    height: calc(100vh - 160px); /* header + footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ridimensiona leggermente l'area upload se lo schermo è molto alto */
+.upload-box {
+    flex: 1;
+    max-height: 40vh;
+}
+
+/* Mantiene i controlli compatti */
+.center-icons {
+    flex-shrink: 0;
+}
+
+.buttons {
+    flex-shrink: 0;
+}
