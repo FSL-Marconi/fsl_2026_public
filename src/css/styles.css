@@ -324,8 +324,8 @@ select {
     width: 40%;
     display: flex;
     flex-direction: column;
-    gap: var(--space-2xl);
-    min-width: 280px;
+    gap: var(--space-xl);
+    min-width: 0;
 }
 
 .upload-box {
@@ -526,6 +526,7 @@ select {
     display: flex;
     flex-direction: column;
     transition: all var(--transition);
+    min-width: 0;
 }
 
 .right-panel:hover {
@@ -719,7 +720,8 @@ select {
 
     .left-panel {
         align-items: center;
-        gap: var(--space-2xl);
+        gap: var(--space-xl);
+        min-width: 0;
     }
 
     /* Upload box scaling */
@@ -746,6 +748,7 @@ select {
         margin-top: var(--space-lg);
         min-height: 300px;
         height: auto;
+        min-width: 0;
     }
 
     #analysisResults {
@@ -835,7 +838,7 @@ select {
 
     /* Buttons mobile layout */
     .buttons {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--space-md);
     }
 
@@ -928,36 +931,37 @@ select {
 
 /* Body without footer padding - footer is fixed and doesn't occupy space */
 body {
-    padding-bottom: 78px;
+    padding-bottom: clamp(65px, 9vh, 78px);
 }
 /* ============================================================================
    FULLSCREEN / F11 HEIGHT CONTROL
    Evita scroll verticale nella parte sinistra
    ============================================================================ */
+@media (min-width: 1024px) {
+    .container {
+        min-height: calc(100vh - 120px); /* header + footer spazio */
+        align-items: stretch;
+    }
 
-.container {
-    min-height: calc(100vh - 120px); /* header + footer spazio */
-    align-items: stretch;
-}
+    .left-panel {
+        height: calc(100vh - 160px); /* header + footer */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 
-.left-panel {
-    height: calc(100vh - 160px); /* header + footer */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+    /* Ridimensiona leggermente l'area upload se lo schermo è molto alto */
+    .upload-box {
+        flex: 1;
+        max-height: 40vh;
+    }
 
-/* Ridimensiona leggermente l'area upload se lo schermo è molto alto */
-.upload-box {
-    flex: 1;
-    max-height: 40vh;
-}
+    /* Mantiene i controlli compatti */
+    .center-icons {
+        flex-shrink: 0;
+    }
 
-/* Mantiene i controlli compatti */
-.center-icons {
-    flex-shrink: 0;
-}
-
-.buttons {
-    flex-shrink: 0;
+    .buttons {
+        flex-shrink: 0;
+    }
 }

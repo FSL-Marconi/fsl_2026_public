@@ -163,6 +163,35 @@ window.addImageFromDataUrl = addImageFromDataUrl;
 const historyPanel = document.getElementById("historyPanel");
 let historyItems = JSON.parse(localStorage.getItem("snapRecycleHistory")) || [];
 
+const leftPanel = document.querySelector('.left-panel');
+const rightPanel = document.querySelector('.right-panel');
+const mobileHistoryQuery = window.matchMedia('(max-width: 640px)');
+const historyOriginalParent = historyPanel ? historyPanel.parentElement : null;
+const historyOriginalNextSibling = historyPanel ? historyPanel.nextSibling : null;
+
+function updateHistoryPanelPosition() {
+    if (!historyPanel || !leftPanel || !rightPanel || !historyOriginalParent) return;
+
+    if (mobileHistoryQuery.matches) {
+        rightPanel.insertAdjacentElement('afterend', historyPanel);
+        return;
+    }
+
+    if (historyOriginalNextSibling && historyOriginalNextSibling.parentNode === historyOriginalParent) {
+        historyOriginalParent.insertBefore(historyPanel, historyOriginalNextSibling);
+    } else {
+        historyOriginalParent.appendChild(historyPanel);
+    }
+}
+
+if (typeof mobileHistoryQuery.addEventListener === 'function') {
+    mobileHistoryQuery.addEventListener('change', updateHistoryPanelPosition);
+} else {
+    mobileHistoryQuery.addListener(updateHistoryPanelPosition);
+}
+
+updateHistoryPanelPosition();
+
 // salva immagine + risposta
 function saveToHistory(image, result) {
 
